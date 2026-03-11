@@ -10,9 +10,12 @@ app.get("/", (req, res) => {
 
 app.use(express.json());
 app.use(cookieParser());
+const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
+const allowedOrigin = new URL(frontendUrl).origin;
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    origin: allowedOrigin,
     credentials: true,
   }),
 );
